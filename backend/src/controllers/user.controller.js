@@ -6,10 +6,12 @@ export async function getRecommendedUsers(req, res) {
         const currentUserId = req.user.id;
         const currentUser = req.user;
 
+        console.log(currentUserId)
+
         const recommendedUsers = await User.find({
             $and: [
                 { _id: { $ne: currentUserId } }, // exclude current user
-                { $id: { $nin: currentUser.friends } }, // exclude current user friends
+                { _id: { $nin: currentUser.friends } }, // exclude current user friends
                 { isOnboarded: true }
             ]
         });
@@ -156,7 +158,7 @@ export async function getOutGoingFriendReqs(req, res) {
             status: "pending"
         }).populate("recipient", "fullName profilePic nativeLanguage learningLanguage");
         
-        res.status(200).json(getOutGoingFriendReqs);
+        res.status(200).json(outGoingRequests);
         
     } catch (error) {
         console.log("error in getOutGoingFriendReqs method", error.message);
