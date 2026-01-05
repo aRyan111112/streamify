@@ -14,18 +14,6 @@ const LoginPage = () => {
 
   const {error, isPending, loginMutation} = useLogin();
 
-  /* 
-  without custom hook-------------
-  const queryClient = useQueryClient();
-  const{mutate: loginMutation, isPending, error} = useMutation({
-    mutationFn: login,
-    onSuccess: () => {
-      toast.success("Logged in successfully.");
-      queryClient.invalidateQueries({querykey: ["authUser"]});
-    }
-  }); 
-  */
-
   const handleLogin = (e) => {
     e.preventDefault();
     loginMutation(loginData);
@@ -70,7 +58,7 @@ const LoginPage = () => {
                     </label>
                     <input
                       type="email"
-                      placeholder="hello@example.com"
+                      placeholder="Demo E-mail: beth@gmail.com"
                       className="input input-bordered w-full"
                       value={loginData.email}
                       onChange={(e) => setLoginData({ ...loginData, email: e.target.value })}
@@ -84,7 +72,7 @@ const LoginPage = () => {
                     </label>
                     <input
                       type="password"
-                      placeholder="••••••••"
+                      placeholder="Demo password: 12345678"
                       className="input input-bordered w-full"
                       value={loginData.password}
                       onChange={(e) => setLoginData({ ...loginData, password: e.target.value })}
